@@ -1,0 +1,108 @@
+import React from 'react';
+import Swiper from 'react-id-swiper';
+import 'react-id-swiper/lib/styles/css/swiper.css';
+
+import data from '../../data';
+
+const StickySlider = () => {
+  const params = {
+    slidesPerView: 3,
+  };
+
+  return (
+    <Swiper {...params}>
+      {data.map((item, idx) => (
+        <div key={idx}>
+          {item.title}
+        </div>
+      ))}
+    </Swiper>
+  );
+};
+
+export default StickySlider;
+export { default } from './StickySlider';
+import React from 'react';
+import css from './Slide.module.scss';
+
+const Slide = ({ children, color }) => {
+  return (
+    <div className={css.container}>
+      <div className={css.content} style={{ background: color }} />
+      <footer className={css.footer}>
+        {children}
+      </footer>
+    </div>
+  );
+};
+
+export default Slide;
+
+.container {
+  margin: 0 1em;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.content {
+  box-sizing: border-box;
+  padding: 50% 0;
+}
+
+.footer {
+  color: #333;
+  font-weight: 700;
+  font-size: 1.25em;
+  text-align: center;
+  padding: 1em;
+}
+
+export { default } from './Slide';
+
+import React from 'react';
+import Swiper from 'react-id-swiper';
+import 'react-id-swiper/lib/styles/css/swiper.css';
+import Slide from '../Slide';
+
+import data from '../../data';
+
+const StickySlider = () => {
+  const params = {
+    slidesPerView: 3,
+  };
+
+  return (
+    <Swiper {...params}>
+      {data.map((item, idx) => (
+        <div key={idx}>
+          {/* добавляем слайд */}
+          <Slide color={item.color}>
+            {item.title}
+          </Slide>
+        </div>
+      ))}
+    </Swiper>
+  );
+};
+
+export default StickySlider;
+
+// App.jsx
+
+import React from 'react';
+import StickySlider from './components/StickySlider';
+import css from './App.module.scss';
+
+const App = () => {
+  return (
+    <div className={css.container}>
+      <h1 className={css.title}>Sticky slider</h1>
+      <div className={css.slider}>
+        <StickySlider />
+      </div>
+    </div>
+  );
+};
+
+export default App;
